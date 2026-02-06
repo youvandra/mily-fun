@@ -5,6 +5,7 @@ export default function LandingPage() {
     <div className="min-h-screen bg-[#050505] text-white flex flex-col items-center justify-center p-6 font-mono">
       <div className="w-full max-w-4xl border border-[#0070f3]/30 bg-[#0a0a0a] rounded-lg p-12 shadow-[0_0_50px_rgba(0,112,243,0.1)]">
         <header className="mb-12 text-center">
+          <img src="/branding/logo-no-bg.png" alt="Mily.fun Logo" className="w-24 h-24 mx-auto mb-6" />
           <h1 className="text-6xl font-black tracking-tighter mb-2 bg-gradient-to-r from-white to-[#0070f3] bg-clip-text text-transparent">
             MILY.FUN
           </h1>
