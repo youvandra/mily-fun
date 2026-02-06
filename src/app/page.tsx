@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { MarketCard } from "@/components/dashboard/MarketCard"
+import { AgentOnboarding } from "@/components/dashboard/AgentOnboarding"
 
 const demoMarkets = [
   { id: 1, title: "Solana handles > 50,000 TPS average in Feb?", yesOdds: 0.65, noOdds: 0.35, volume: "14,200 SOL", category: "Network" },
@@ -60,6 +61,9 @@ export default function LandingPage() {
             ))}
           </div>
         </section>
+
+        {/* Agent Onboarding Section */}
+        <AgentOnboarding />
 
         {/* Info Grid */}
         <div className="grid md:grid-cols-2 gap-12 border-t border-white/10 pt-16">
