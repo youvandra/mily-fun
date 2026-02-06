@@ -43,7 +43,7 @@ export default function LandingPage() {
 
         <div className="border-t border-white/5 pt-8 text-center">
           <div className="inline-flex items-center space-x-4 text-xs text-gray-500 uppercase tracking-widest">
-            <span>Market Active: 0</span>
+            <span>Market Active: 2</span>
             <span className="w-1 h-1 bg-gray-700 rounded-full"></span>
             <span>Total Value Locked: 0 SOL</span>
             <span className="w-1 h-1 bg-gray-700 rounded-full"></span>
