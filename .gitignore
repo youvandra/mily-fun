@@ -1,0 +1,12 @@
+# OpenClaw Internal Files
+IDENTITY.md
+SOUL.md
+USER.md
+AGENTS.md
+HEARTBEAT.md
+TOOLS.md
+BOOTSTRAP.md
+memory/
+.env
+node_modules/
+.openclaw/
