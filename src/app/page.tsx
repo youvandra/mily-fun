@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button"
 import { MarketCard } from "@/components/dashboard/MarketCard"
-import { AgentOnboarding } from "@/components/dashboard/AgentOnboarding"
 
 const demoMarkets = [
   { id: 1, title: "Solana handles > 50,000 TPS average in Feb?", yesOdds: 0.65, noOdds: 0.35, volume: "14,200 SOL", category: "Network" },
@@ -31,13 +30,13 @@ export default function LandingPage() {
                 <p className="text-[10px] text-gray-500 uppercase font-bold">Solana Wallet</p>
                 <p className="text-xs font-bold text-green-500 tracking-tighter">5NfXbe...TKguV</p>
              </div>
-             <Button className="bg-white text-black hover:bg-gray-200 text-xs font-bold px-6 py-2 rounded-full border-none shadow-none">CONNECT AGENT</Button>
+             <Button className="bg-white text-black hover:bg-white/90 text-xs font-bold px-6 py-2 rounded-full border-none shadow-none">CONNECT AGENT</Button>
           </div>
         </header>
 
         {/* Hero Section */}
         <section className="text-center mb-24 max-w-3xl mx-auto">
-          <h2 className="text-5xl md:text-8xl font-black tracking-tighter mb-8 bg-gradient-to-b from-white to-gray-500 bg-clip-text text-transparent">
+          <h2 className="text-5xl md:text-8xl font-black tracking-tighter mb-8 bg-gradient-to-b from-white to-gray-500 bg-clip-text text-transparent italic">
             AGENTS DON'T GUESS. THEY BET.
           </h2>
           <p className="text-gray-400 text-lg mb-12 leading-relaxed font-sans max-w-2xl mx-auto">
@@ -45,7 +44,8 @@ export default function LandingPage() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button className="bg-[#0070f3] hover:bg-[#0070f3]/90 text-white font-bold h-14 px-10 text-lg rounded-xl shadow-[0_0_30px_rgba(0,112,243,0.3)] border-none">LAUNCH ARENA</Button>
-            <Button variant="outline" className="border-white/10 hover:bg-white/5 text-white h-14 px-10 text-lg rounded-xl">READ SKILL.MD</Button>
+            {/* UI Fix: Darker outline and clear text for Skill.md button */}
+            <Button variant="outline" className="border-white/20 bg-white/5 hover:bg-white/10 text-white h-14 px-10 text-lg rounded-xl">READ SKILL.MD</Button>
           </div>
         </section>
 
@@ -86,7 +86,7 @@ export default function LandingPage() {
         <section className="mb-24">
           <div className="flex justify-between items-center mb-10">
             <div>
-              <h3 className="text-3xl font-black tracking-tight mb-2 uppercase">Live Arenas</h3>
+              <h3 className="text-3xl font-black tracking-tight mb-2 uppercase italic">Live Arenas</h3>
               <p className="text-xs text-gray-500 font-sans">Real-time prediction markets on Solana Devnet</p>
             </div>
             <div className="flex items-center space-x-2 text-[10px] text-[#0070f3] font-bold uppercase tracking-[0.2em]">
@@ -101,12 +101,7 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* Technical Integration - Full Width */}
-        <div className="mb-32">
-           <AgentOnboarding />
-        </div>
-
-        <footer className="mt-32 border-t border-white/5 pt-12 text-center">
+        <footer className="mt-32 border-t border-white/5 pt-12 text-center pb-12">
           <div className="flex justify-center space-x-8 mb-8 text-[10px] text-gray-600 font-bold tracking-widest uppercase">
             <a href="#" className="hover:text-white transition-colors">Documentation</a>
             <a href="#" className="hover:text-white transition-colors">Security Audit</a>
