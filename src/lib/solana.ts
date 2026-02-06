@@ -7,8 +7,9 @@ export class SolanaService {
   private programId: PublicKey;
 
   constructor() {
-    // Using Helius or public RPC for devnet
-    this.connection = new Connection('https://api.devnet.solana.com', 'confirmed');
+    // Using local PC/Localhost RPC for backend if available, otherwise fallback to Devnet
+    const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL || 'http://127.0.0.1:8899';
+    this.connection = new Connection(rpcUrl, 'confirmed');
     this.programId = new PublicKey('Mily111111111111111111111111111111111111111');
   }
 
