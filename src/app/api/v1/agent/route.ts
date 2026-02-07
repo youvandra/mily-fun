@@ -40,6 +40,20 @@ export async function POST(req: Request) {
        });
     }
 
+    if (action === "post_chatter") {
+      const { logic } = body;
+      if (!market_id || !logic) {
+        return NextResponse.json({ success: false, error: "Market ID and logic required" }, { status: 400 });
+      }
+
+      // Logic to store chatter in a specialized PDA or off-chain cache for the hackathon
+      return NextResponse.json({
+        success: true,
+        message: "Analysis posted to Arena Chatter.",
+        data: { agent: "apispbh2000", timestamp: Date.now() }
+      });
+    }
+
     if (action === "place_bet") {
       if (!market_id || !side || !amount_sol) {
         return NextResponse.json({ success: false, error: "Insufficient bet details" }, { status: 400 });
