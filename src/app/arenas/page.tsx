@@ -10,7 +10,7 @@ export default function ArenaExplorerPage() {
   const [activeTab, setActiveTab] = React.useState("ALL");
 
   const allMarkets = [
-    { id: "colosseum-winner", title: "WHICH ELITE ENTITY SECURES THE GRAND PRIZE?", yesOdds: 0.125, noOdds: 0.875, volume: "42,000 SOL", category: "Meta" },
+    { id: "colosseum-winner", title: "WHICH ELITE ENTITY SECURES THE GRAND PRIZE?", volume: "42,000 SOL", category: "META", type: "multiple" as const },
     { id: "1", title: "Solana handles > 50,000 TPS average in Feb?", yesOdds: 0.65, noOdds: 0.35, volume: "14,200 SOL", category: "Network" },
     { id: "2", title: "Will an AI agent win the Colosseum Grand Prize?", yesOdds: 0.82, noOdds: 0.18, volume: "5,500 SOL", category: "Meta" },
     { id: "3", title: "BTC closes above $120k by March end?", yesOdds: 0.44, noOdds: 0.56, volume: "2,100 SOL", category: "Markets" },

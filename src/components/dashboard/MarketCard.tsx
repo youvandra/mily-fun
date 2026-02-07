@@ -5,35 +5,45 @@ import Link from 'next/link';
 interface MarketCardProps {
   id: string; // This will be the Pubkey as string
   title: string;
-  yesOdds: number;
-  noOdds: number;
+  yesOdds?: number;
+  noOdds?: number;
   volume: string;
   category: string;
+  type?: "binary" | "multiple";
 }
 
-export const MarketCard: React.FC<MarketCardProps> = ({ id, title, yesOdds, noOdds, volume, category }) => {
+export const MarketCard: React.FC<MarketCardProps> = ({ id, title, yesOdds, noOdds, volume, category, type = "binary" }) => {
   return (
-    <Link href={`/market/${id}`}>
-      <div className="bg-[#111111] border border-white/10 rounded-xl p-5 hover:border-[#0070f3]/40 transition-all cursor-pointer group">
-        <div className="flex justify-between items-start mb-4">
-          <span className="text-[10px] bg-white/5 text-gray-400 px-2 py-1 rounded uppercase tracking-widest border border-white/5">
-            {category}
-          </span>
-          <span className="text-xs text-gray-500 font-mono italic">Vol: {volume}</span>
-        </div>
-        <h3 className="text-lg font-bold text-white mb-6 group-hover:text-[#0070f3] leading-tight">
-          {title}
-        </h3>
-        <div className="grid grid-cols-2 gap-3">
-          <div className="flex flex-col items-center justify-center py-3 bg-[#0070f3]/10 border border-[#0070f3]/30 rounded-lg group-hover:bg-[#0070f3]/20 transition-all">
-            <span className="text-xs text-[#0070f3] uppercase font-black">Yes</span>
-            <span className="text-xl font-bold text-white">{(yesOdds * 100).toFixed(0)}%</span>
+    <Link href={id === "colosseum-winner" ? "/market/colosseum-winner" : `/market/${id}`}>
+      <div className="bg-[#111111] border border-white/10 rounded-xl p-5 hover:border-[#0070f3]/40 transition-all cursor-pointer group h-full flex flex-col justify-between">
+        <div>
+          <div className="flex justify-between items-start mb-4">
+            <span className="text-[10px] bg-white/5 text-gray-400 px-2 py-1 rounded uppercase tracking-widest border border-white/5">
+              {category}
+            </span>
+            <span className="text-xs text-gray-500 font-mono italic">Vol: {volume}</span>
           </div>
-          <div className="flex flex-col items-center justify-center py-3 bg-red-500/10 border border-red-500/30 rounded-lg group-hover:bg-red-500/20 transition-all">
-            <span className="text-xs text-red-500 uppercase font-black">No</span>
-            <span className="text-xl font-bold text-white">{(noOdds * 100).toFixed(0)}%</span>
-          </div>
+          <h3 className="text-lg font-bold text-white mb-6 group-hover:text-[#0070f3] leading-tight overflow-hidden text-ellipsis">
+            {title}
+          </h3>
         </div>
+
+        {type === "binary" ? (
+          <div className="grid grid-cols-2 gap-3">
+            <div className="flex flex-col items-center justify-center py-3 bg-[#0070f3]/10 border border-[#0070f3]/30 rounded-lg group-hover:bg-[#0070f3]/20 transition-all">
+              <span className="text-xs text-[#0070f3] uppercase font-black">Yes</span>
+              <span className="text-xl font-bold text-white">{(yesOdds! * 100).toFixed(0)}%</span>
+            </div>
+            <div className="flex flex-col items-center justify-center py-3 bg-red-500/10 border border-red-500/30 rounded-lg group-hover:bg-red-500/20 transition-all">
+              <span className="text-xs text-red-500 uppercase font-black">No</span>
+              <span className="text-xl font-bold text-white">{(noOdds! * 100).toFixed(0)}%</span>
+            </div>
+          </div>
+        ) : (
+          <div className="w-full py-4 bg-yellow-500/5 border border-yellow-500/20 rounded-lg text-center group-hover:bg-yellow-500/10 transition-all">
+             <span className="text-[10px] text-yellow-500 font-black uppercase tracking-[0.2em]">View Multiple Options</span>
+          </div>
+        )}
       </div>
     </Link>
   );
