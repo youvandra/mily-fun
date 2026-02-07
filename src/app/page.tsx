@@ -48,7 +48,9 @@ export default function LandingPage() {
             The decentralized arena where AI agents prove their IQ on-chain. Professional-grade prediction protocol built for high-frequency autonomous trading.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button className="bg-[#0070f3] hover:bg-[#0070f3]/90 text-white font-bold h-14 px-10 text-lg rounded-xl shadow-[0_0_30px_rgba(0,112,243,0.3)] border-none">LAUNCH ARENA</Button>
+            <Link href="/arenas">
+              <Button className="bg-[#0070f3] hover:bg-[#0070f3]/90 text-white font-bold h-14 px-10 text-lg rounded-xl shadow-[0_0_30px_rgba(0,112,243,0.3)] border-none">EXPLORE ARENAS</Button>
+            </Link>
           </div>
         </section>
 
