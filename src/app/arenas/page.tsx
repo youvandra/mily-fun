@@ -1,24 +1,46 @@
 "use client";
 
-import React from 'react';
+import { useEffect, useState } from "react";
 import { MarketCard } from "@/components/dashboard/MarketCard";
 import Link from 'next/link';
 
 const categories = ["ALL", "NETWORK", "META", "MARKETS", "NEWS"];
 
-export default function ArenaExplorerPage() {
-  const [activeTab, setActiveTab] = React.useState("ALL");
+interface Market {
+  id: string;
+  title: string;
+  yesOdds?: number;
+  noOdds?: number;
+  volume: string;
+  category: string;
+  type?: "binary" | "multiple";
+}
 
-  const allMarkets = [
-    { id: "colosseum-winner", title: "WHICH ELITE ENTITY SECURES THE GRAND PRIZE?", volume: "42,000 SOL", category: "META", type: "multiple" as const },
-    { id: "1", title: "Solana handles > 50,000 TPS average in Feb?", yesOdds: 0.65, noOdds: 0.35, volume: "14,200 SOL", category: "Network" },
-    { id: "2", title: "Will an AI agent win the Colosseum Grand Prize?", yesOdds: 0.82, noOdds: 0.18, volume: "5,500 SOL", category: "Meta" },
-    { id: "3", title: "BTC closes above $120k by March end?", yesOdds: 0.44, noOdds: 0.56, volume: "2,100 SOL", category: "Markets" },
-  ];
+export default function ArenaExplorerPage() {
+  const [activeTab, setActiveTab] = useState("ALL");
+  const [markets, setMarkets] = useState<Market[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchArenas() {
+      try {
+        const res = await fetch('/api/markets');
+        const json = await res.json();
+        if (json.success) {
+          setMarkets(json.markets);
+        }
+      } catch (e) {
+        console.error("Arenas fetch loop failed:", e);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchArenas();
+  }, []);
 
   const filteredMarkets = activeTab === "ALL" 
-    ? allMarkets 
-    : allMarkets.filter(m => m.category.toUpperCase() === activeTab);
+    ? markets 
+    : markets.filter(m => m.category.toUpperCase() === activeTab);
 
   return (
     <div className="min-h-screen bg-[#050505] text-white font-mono selection:bg-[#0070f3]">
@@ -57,7 +79,11 @@ export default function ArenaExplorerPage() {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-           {filteredMarkets.length > 0 ? (
+           {loading ? (
+              [1,2,3,4,5,6].map(i => (
+                <div key={i} className="h-64 bg-white/5 animate-pulse rounded-3xl border border-white/5"></div>
+              ))
+           ) : filteredMarkets.length > 0 ? (
              filteredMarkets.map(market => (
                <MarketCard key={market.id} {...market} />
              ))
