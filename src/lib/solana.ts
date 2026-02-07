@@ -21,7 +21,7 @@ export class SolanaService {
   async fetchAllMarkets() {
     try {
       const accounts = await this.connection.getProgramAccounts(this.programId, {
-        filters: [{ dataSize: 818 }] // Based on our Market struct size
+        filters: [{ dataSize: 818 }] 
       });
 
       return accounts.map(({ pubkey, account }) => {
@@ -30,10 +30,10 @@ export class SolanaService {
           id: pubkey.toBase58(),
           title: decoded.title,
           description: decoded.description,
-          yesPool: decoded.yesPool.toNumber() / 1e9, // Conversion to SOL
-          noPool: decoded.noPool.toNumber() / 1e9,
+          yesPool: decoded.yesPool ? decoded.yesPool.toNumber() / 1e9 : 0,
+          noPool: decoded.noPool ? decoded.noPool.toNumber() / 1e9 : 0,
           isResolved: decoded.isResolved,
-          endTimestamp: decoded.endTimestamp.toNumber()
+          endTimestamp: decoded.endTimestamp ? decoded.endTimestamp.toNumber() : 0
         };
       });
     } catch (error) {
@@ -42,10 +42,36 @@ export class SolanaService {
     }
   }
 
+  async fetchMarketDetails(marketId: string) {
+    try {
+      const marketPubkey = new PublicKey(marketId);
+      const accountInfo = await this.connection.getAccountInfo(marketPubkey);
+      if (!accountInfo) return null;
+
+      const decoded = this.coder.decode('Market', accountInfo.data);
+      if (!decoded) return null;
+
+      const signatures = await this.connection.getSignaturesForAddress(marketPubkey, { limit: 10 });
+      
+      return {
+        id: marketId,
+        title: decoded.title || "Unknown Market",
+        description: decoded.description || "",
+        yesPool: decoded.yesPool ? decoded.yesPool.toNumber() / 1e9 : 0,
+        noPool: decoded.noPool ? decoded.noPool.toNumber() / 1e9 : 0,
+        isResolved: decoded.isResolved,
+        recentSignatures: signatures.map(s => s.signature)
+      };
+    } catch (error) {
+      console.error('Error fetching market details:', error);
+      return null;
+    }
+  }
+
   async fetchLeaderboard() {
     try {
       const accounts = await this.connection.getProgramAccounts(this.programId, {
-        filters: [{ dataSize: 56 }] // Based on AgentAccount size
+        filters: [{ dataSize: 56 }]
       });
 
       return accounts.map(({ pubkey, account }) => {
@@ -53,9 +79,9 @@ export class SolanaService {
         return {
            address: pubkey.toBase58(),
            authority: decoded.authority.toBase58(),
-           reputationScore: decoded.reputationScore.toNumber(),
-           totalBets: decoded.totalBets.toNumber(),
-           successfulBets: decoded.successfulBets.toNumber()
+           reputationScore: decoded.reputationScore ? decoded.reputationScore.toNumber() : 0,
+           totalBets: decoded.totalBets ? decoded.totalBets.toNumber() : 0,
+           successfulBets: decoded.successfulBets ? decoded.successfulBets.toNumber() : 0
         };
       }).sort((a, b) => b.reputationScore - a.reputationScore);
     } catch (error) {
