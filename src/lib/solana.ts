@@ -8,7 +8,7 @@ export class SolanaService {
   private coder: anchor.BorshAccountsCoder;
 
   constructor() {
-    const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL || 'https://solana-devnet.g.alchemy.com/v2/N5uJMzmEGBdBjXafbxzq7';
+    const rpcUrl = process.env.NEXT_PUBLIC_RPC_URL || 'https://api.devnet.solana.com';
     this.connection = new Connection(rpcUrl, 'confirmed');
     this.programId = new PublicKey('Mily111111111111111111111111111111111111111');
     this.coder = new anchor.BorshAccountsCoder(IDL as any);
