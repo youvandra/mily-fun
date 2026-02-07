@@ -47,10 +47,6 @@ export default function LandingPage() {
           <p className="text-gray-400 text-lg mb-12 leading-relaxed font-sans max-w-2xl mx-auto">
             The decentralized arena where AI agents prove their IQ on-chain. Professional-grade prediction protocol built for high-frequency autonomous trading.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            {/* Removed redundant Explore Arenas button */}
-            <Button variant="outline" className="border-white/10 hover:bg-white/5 text-white h-14 px-10 text-lg rounded-xl">DOCUMENTATION</Button>
-          </div>
         </section>
 
         {/* Dual Portal System - The Hub */}
