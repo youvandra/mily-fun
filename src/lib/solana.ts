@@ -13,6 +13,10 @@ export class SolanaService {
     this.programId = new PublicKey('Mily111111111111111111111111111111111111111');
   }
 
+  getConnection() {
+    return this.connection;
+  }
+
   async fetchAllMarkets() {
     try {
       // Fetch all accounts belonging to our program
