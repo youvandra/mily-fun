@@ -11,10 +11,11 @@ interface UnifiedMarket {
   type: "binary" | "multiple";
 }
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   const solana = new SolanaService();
   
-  // Realism Boost: Distribution of 10 SOL across arenas for better distribution
   const officialArenas: UnifiedMarket[] = [
     { id: "MILY-ARENA-COLOSSEUM", title: "WHICH ELITE ENTITY SECURES THE GRAND PRIZE?", yesOdds: 0.5, noOdds: 0.5, volume: "1.50 SOL", category: "META", type: "multiple" },
     { id: "SOL-TPS-TARGET-50K", title: "Solana handles > 50,000 TPS average in Feb?", yesOdds: 0.5, noOdds: 0.5, volume: "1.25 SOL", category: "NETWORK", type: "binary" },
@@ -32,13 +33,18 @@ export async function GET() {
 
   try {
     const rawMarkets = await solana.fetchAllMarkets();
+    
+    if (!rawMarkets || rawMarkets.length === 0) {
+      return NextResponse.json({ success: true, markets: officialArenas });
+    }
+
     const finalMarkets = officialArenas.map(official => {
         const onchain = rawMarkets.find(m => m.id === official.id);
         if (onchain) {
-            const total = onchain.yesPool + onchain.noPool;
+            const total = (onchain.yesPool || 0) + (onchain.noPool || 0);
             return {
                 ...official,
-                volume: `${total.toFixed(2)} SOL`,
+                volume: total > 0 ? `${total.toFixed(2)} SOL` : official.volume,
                 yesOdds: total > 0 ? onchain.yesPool / total : 0.5,
                 noOdds: total > 0 ? onchain.noPool / total : 0.5
             };
