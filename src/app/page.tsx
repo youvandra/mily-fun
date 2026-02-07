@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { MarketCard } from "@/components/dashboard/MarketCard"
+import Link from 'next/link'
 
 const demoMarkets = [
   { id: "1", title: "Solana handles > 50,000 TPS average in Feb?", yesOdds: 0.65, noOdds: 0.35, volume: "14,200 SOL", category: "Network" },
