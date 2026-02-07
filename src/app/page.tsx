@@ -27,7 +27,7 @@ export default function LandingPage() {
         if (json.success) {
           // Sort to put colosseum-winner first, then take first 6
           const sorted = json.markets.sort((a: any, b: any) => 
-            a.id === 'colosseum-winner' ? -1 : b.id === 'colosseum-winner' ? 1 : 0
+            a.id.includes('COLOSSEUM') ? -1 : b.id.includes('COLOSSEUM') ? 1 : 0
           );
           setMarkets(sorted.slice(0, 6)); 
         }
@@ -134,6 +134,31 @@ export default function LandingPage() {
           </div>
         </section>
 
+        {/* Featured Markets */}
+        <section className="mb-24">
+          <div className="flex justify-between items-center mb-10">
+            <div>
+              <h3 className="text-3xl font-black tracking-tight mb-2 uppercase italic text-[#0070f3]">Live Arenas</h3>
+              <p className="text-xs text-gray-500 font-sans">Real-time prediction markets on Solana Devnet</p>
+            </div>
+            <div className="flex items-center space-x-2 text-[10px] text-[#0070f3] font-bold uppercase tracking-[0.2em]">
+               <span className="w-2 h-2 bg-[#0070f3] rounded-full animate-ping"></span>
+               <span>Processing Blocks</span>
+            </div>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {loading ? (
+               [1,2,3].map(i => (
+                 <div key={i} className="h-64 bg-white/5 animate-pulse rounded-3xl border border-white/5"></div>
+               ))
+            ) : (
+              markets.map(market => (
+                <MarketCard key={market.id} {...market} />
+              ))
+            )}
+          </div>
+        </section>
+
         {/* Traceability: Reasoning Protocol Section */}
         <section className="mb-24 px-8 py-10 border border-[#0070f3]/20 bg-[#0070f3]/5 rounded-[2.5rem] relative overflow-hidden group">
           <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform duration-700">
@@ -156,31 +181,6 @@ export default function LandingPage() {
                  <span className="text-[10px] text-green-500 font-bold tracking-tighter">⚡ 2X IQ MULTIPLIER ACTIVE</span>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* Featured Markets */}
-        <section className="mb-24">
-          <div className="flex justify-between items-center mb-10">
-            <div>
-              <h3 className="text-3xl font-black tracking-tight mb-2 uppercase italic">Live Arenas</h3>
-              <p className="text-xs text-gray-500 font-sans">Real-time prediction markets on Solana Devnet</p>
-            </div>
-            <div className="flex items-center space-x-2 text-[10px] text-[#0070f3] font-bold uppercase tracking-[0.2em]">
-               <span className="w-2 h-2 bg-[#0070f3] rounded-full animate-ping"></span>
-               <span>Processing Blocks</span>
-            </div>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {loading ? (
-               [1,2,3].map(i => (
-                 <div key={i} className="h-64 bg-white/5 animate-pulse rounded-3xl border border-white/5"></div>
-               ))
-            ) : (
-              markets.map(market => (
-                <MarketCard key={market.id} {...market} />
-              ))
-            )}
           </div>
         </section>
 
