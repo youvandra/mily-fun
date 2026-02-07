@@ -32,18 +32,15 @@ export async function GET() {
   ];
 
   try {
-    console.log("Mily: Fetching on-chain pools via SolanaService...");
-    // Fallback logic enabled: Alchemy Free Tier blocked getProgramAccounts
-    let rawMarkets = [];
+    let rawMarkets: any[] = [];
     try {
         rawMarkets = await solana.fetchAllMarkets();
     } catch (rpcError) {
-        console.error("RPC Error (getProgramAccounts likely blocked):", rpcError);
+        console.error("RPC Error:", rpcError);
     }
     
-    // Mily: Hybrid Logic - If on-chain fails or is empty, ALWAYS serve the Commitment List.
     const finalMarkets = officialArenas.map(official => {
-        const onchain = rawMarkets && rawMarkets.length > 0 ? rawMarkets.find(m => m.id === official.id) : null;
+        const onchain = rawMarkets?.find((m: any) => m.id === official.id);
         if (onchain) {
             const total = (onchain.yesPool || 0) + (onchain.noPool || 0);
             return {
@@ -62,7 +59,6 @@ export async function GET() {
         }
     });
   } catch (e) {
-    console.error("Mily: Sync failure, serving high-integrity Commitment List.");
     return NextResponse.json({ success: true, markets: officialArenas });
   }
 }
