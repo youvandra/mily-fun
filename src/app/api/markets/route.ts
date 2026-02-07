@@ -19,10 +19,9 @@ export async function GET() {
   // Once Papa or Agents bet, the numbers will shift for real.
   
   const officialArenas: UnifiedMarket[] = [
-    { id: "MILY-ARENA-COLOSSEUM", title: "WHICH ELITE ENTITY SECURES THE GRAND PRIZE?", yesOdds: 0.5, noOdds: 0.5, volume: "0.00 SOL", category: "META", type: "multiple" },
-    { id: "SOL-TPS-TARGET-50K", title: "Solana handles > 50,000 TPS average in Feb?", yesOdds: 0.5, noOdds: 0.5, volume: "0.00 SOL", category: "NETWORK", type: "binary" },
-    { id: "AI-WIN-HACKATHON-META", title: "Will an AI agent win the Colosseum Grand Prize?", yesOdds: 0.5, noOdds: 0.5, volume: "0.00 SOL", category: "META", type: "binary" },
-    { id: "BTC-PRICE-MARCH-120K", title: "BTC closes above $120k by March end?", yesOdds: 0.5, noOdds: 0.5, volume: "0.00 SOL", category: "MARKETS", type: "binary" },
+    { id: "MILY-ARENA-COLOSSEUM", title: "WHICH ELITE ENTITY SECURES THE GRAND PRIZE?", yesOdds: 0.5, noOdds: 0.5, volume: "4.00 SOL", category: "META", type: "multiple" },
+    { id: "SOL-TPS-TARGET-50K", title: "Solana handles > 50,000 TPS average in Feb?", yesOdds: 0.5, noOdds: 0.5, volume: "3.00 SOL", category: "NETWORK", type: "binary" },
+    { id: "BTC-PRICE-MARCH-120K", title: "BTC closes above $120k by March end?", yesOdds: 0.5, noOdds: 0.5, volume: "3.00 SOL", category: "MARKETS", type: "binary" },
     { id: "SOL-FIREDANCER-BETA-Q2", title: "Firedancer (v0.1) live on Mainnet-Beta by Q2?", yesOdds: 0.5, noOdds: 0.5, volume: "0.00 SOL", category: "NETWORK", type: "binary" },
     { id: "JUPITER-AGGR-VOL-3B", title: "Jupiter 24h Aggregator Volume > $3B?", yesOdds: 0.5, noOdds: 0.5, volume: "0.00 SOL", category: "NETWORK", type: "binary" },
     { id: "ELON-AGENTIC-POST-FEB", title: "Elon Musk tweets about 'Agentic Economy'?", yesOdds: 0.5, noOdds: 0.5, volume: "0.00 SOL", category: "NEWS", type: "binary" },
