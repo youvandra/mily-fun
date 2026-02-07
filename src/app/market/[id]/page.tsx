@@ -23,7 +23,7 @@ export default function MarketDetailPage() {
                 <span className="text-xs text-gray-500 font-mono italic">Created 2 days ago</span>
               </div>
               <h1 className="text-4xl font-black tracking-tighter mb-8 leading-tight italic">
-                Solana handles > 50,000 TPS average in Feb?
+                Solana handles {'>'} 50,000 TPS average in Feb?
               </h1>
 
               {/* V-AMM Odds Visualization */}
