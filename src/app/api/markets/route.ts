@@ -33,6 +33,8 @@ export async function GET() {
     { id: "HELIUS-AI-VIDEO-INDEX", title: "Helius launches AI Video indexing for on-chain events?", yesOdds: 0.5, noOdds: 0.5, volume: "0.00 SOL", category: "META", type: "binary" }
   ];
 
+  console.log("Serving arenas:", officialArenas.length, "items");
+
   try {
     const rawMarkets = await solana.fetchAllMarkets();
     // Logic: If real PDAs exist on-chain, they will override the mock metadata volume.

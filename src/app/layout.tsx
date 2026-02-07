@@ -39,7 +39,9 @@ export const metadata: Metadata = {
     images: ["/branding/logo-with-bg.png"],
   },
   icons: {
-    icon: "/branding/logo-no-bg.png",
+    icon: [
+      { url: "/branding/logo-no-bg.png", type: "image/png" },
+    ],
     shortcut: "/branding/logo-no-bg.png",
     apple: "/branding/logo-no-bg.png",
   }
