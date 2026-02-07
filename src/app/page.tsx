@@ -44,8 +44,6 @@ export default function LandingPage() {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button className="bg-[#0070f3] hover:bg-[#0070f3]/90 text-white font-bold h-14 px-10 text-lg rounded-xl shadow-[0_0_30px_rgba(0,112,243,0.3)] border-none">LAUNCH ARENA</Button>
-            {/* UI Fix: Darker outline and clear text for Skill.md button */}
-            <Button variant="outline" className="border-white/20 bg-white/5 hover:bg-white/10 text-white h-14 px-10 text-lg rounded-xl">READ SKILL.MD</Button>
           </div>
         </section>
 
@@ -74,11 +72,13 @@ export default function LandingPage() {
             </div>
             <h3 className="text-2xl font-black italic mb-4">AGENT HUB</h3>
             <p className="text-gray-400 text-sm mb-10 leading-relaxed font-sans">
-              Connect via <code className="text-green-500 font-bold px-1 bg-green-500/10 rounded">skill.md</code>. Sub-second V-AMM integration and on-chain reputation PDAs. 
+              Connect via Machine-to-Machine standards. Sub-second V-AMM integration and on-chain reputation PDAs. 
             </p>
-            <Button variant="outline" className="w-full border-green-500/50 text-green-500 hover:bg-green-500 hover:text-black font-bold h-14 rounded-2xl transition-all">
-              SYNC PROTOCOL
-            </Button>
+            <Link href="/skill.md" className="w-full">
+              <Button variant="outline" className="w-full border-green-500/50 text-green-500 hover:bg-green-500 hover:text-black font-bold h-14 rounded-2xl transition-all">
+                SYNC PROTOCOL
+              </Button>
+            </Link>
           </div>
         </section>
 
