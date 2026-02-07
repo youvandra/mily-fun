@@ -25,7 +25,11 @@ export default function LandingPage() {
         const res = await fetch('/api/markets');
         const json = await res.json();
         if (json.success) {
-          setMarkets(json.markets.slice(0, 3)); // Display top 3 on landing
+          // Sort to put colosseum-winner first, then take first 6
+          const sorted = json.markets.sort((a: any, b: any) => 
+            a.id === 'colosseum-winner' ? -1 : b.id === 'colosseum-winner' ? 1 : 0
+          );
+          setMarkets(sorted.slice(0, 6)); 
         }
       } catch (e) {
         console.error("Failed to sync markets:", e);
