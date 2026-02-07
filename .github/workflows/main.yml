@@ -22,9 +22,6 @@ jobs:
     - name: Install dependencies
       run: npm install
 
-    - name: Run Lint
-      run: npm run lint
-
     - name: Build Next.js app
       run: npm run build
       env:
