@@ -12,7 +12,7 @@ interface MarketCardProps {
   type?: "binary" | "multiple";
 }
 
-export const MarketCard: React.FC<MarketCardProps> = ({ id, title, yesOdds, noOdds, volume, category, type = "binary" }) => {
+export const MarketCard: React.FC<MarketCardProps> = ({ id, title, yesOdds = 0.5, noOdds = 0.5, volume, category, type = "binary" }) => {
   return (
     <Link href={id === "colosseum-winner" ? "/market/colosseum-winner" : `/market/${id}`}>
       <div className="bg-[#111111] border border-white/10 rounded-xl p-5 hover:border-[#0070f3]/40 transition-all cursor-pointer group h-full flex flex-col justify-between">

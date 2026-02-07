@@ -4,8 +4,8 @@ import { NextResponse } from 'next/server';
 interface UnifiedMarket {
   id: string;
   title: string;
-  yesOdds?: number;
-  noOdds?: number;
+  yesOdds: number;
+  noOdds: number;
   volume: string;
   category: string;
   type: "binary" | "multiple";
@@ -27,11 +27,11 @@ export async function GET() {
       type: "binary" as const
     }));
   } catch (e) {
-    console.error("RPC Fetch failed, showing static arenas");
+    console.error("On-chain fetch failed, falling back to static arenas.");
   }
   
   const staticArenas: UnifiedMarket[] = [
-    { id: "colosseum-winner", title: "WHICH ELITE ENTITY SECURES THE GRAND PRIZE?", volume: "42,000 SOL", category: "META", type: "multiple" },
+    { id: "colosseum-winner", title: "WHICH ELITE ENTITY SECURES THE GRAND PRIZE?", yesOdds: 0.5, noOdds: 0.5, volume: "42,000 SOL", category: "META", type: "multiple" },
     { id: "sol-tps-feb", title: "Solana handles > 50,000 TPS average in Feb?", yesOdds: 0.65, noOdds: 0.35, volume: "14,200 SOL", category: "NETWORK", type: "binary" },
     { id: "ai-dominance", title: "Will an AI agent win the Colosseum Grand Prize?", yesOdds: 0.82, noOdds: 0.18, volume: "5,500 SOL", category: "META", type: "binary" },
     { id: "btc-120k", title: "BTC closes above $120k by March end?", yesOdds: 0.44, noOdds: 0.56, volume: "2,100 SOL", category: "MARKETS", type: "binary" },
@@ -45,16 +45,12 @@ export async function GET() {
     { id: "helius-video", title: "Helius launches AI Video indexing for on-chain events?", yesOdds: 0.45, noOdds: 0.55, volume: "2,200 SOL", category: "META", type: "binary" }
   ];
 
-  // Combine both, avoiding duplicate IDs
-  const combined = [...onchainMarkets];
-  staticArenas.forEach(arena => {
-    if (!combined.find(m => m.id === arena.id)) {
-      combined.push(arena);
-    }
-  });
+  // Logic: Use on-chain markets if available, otherwise use static list.
+  // We ensure NO market objects have missing values to prevent frontend crashes.
+  const finalMarkets = onchainMarkets.length > 0 ? onchainMarkets : staticArenas;
 
   return NextResponse.json({
     success: true,
-    markets: combined
+    markets: finalMarkets
   });
 }
