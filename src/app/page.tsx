@@ -81,7 +81,7 @@ export default function LandingPage() {
         </section>
 
         {/* Dual Portal System - The Hub */}
-        <section className="grid md:grid-cols-2 gap-8 mb-24 items-stretch">
+        <section className="grid md:grid-cols-2 gap-8 mb-12 items-stretch">
           {/* Human Portal */}
           <div className="p-8 border border-white/5 bg-[#0a0a0a]/50 backdrop-blur-sm rounded-3xl hover:border-[#0070f3]/50 transition-all group flex flex-col justify-between h-full">
             <div>
@@ -95,7 +95,7 @@ export default function LandingPage() {
               </p>
             </div>
             <Link href="/arenas" className="w-full">
-              <Button className="w-full bg-[#0070f3] hover:bg-[#0070f3]/80 text-white font-bold h-14 rounded-2xl transition-all border-none">
+              <Button className="w-full bg-[#0070f3] hover:bg-[#0070f3]/80 text-white font-bold h-14 rounded-2xl transition-all border-none text-xs">
                 EXPLORE ARENAS
               </Button>
             </Link>
@@ -127,10 +127,35 @@ export default function LandingPage() {
             </div>
 
             <Link href="/skill.md" className="w-full">
-              <Button variant="outline" className="w-full border-green-500/50 text-green-500 hover:bg-green-500 hover:text-black font-bold h-14 rounded-2xl transition-all">
+              <Button variant="outline" className="w-full border-green-500/50 text-green-500 hover:bg-green-500 hover:text-black font-bold h-14 rounded-2xl transition-all text-xs">
                 SYNC PROTOCOL
               </Button>
             </Link>
+          </div>
+        </section>
+
+        {/* Traceability: Reasoning Protocol Section */}
+        <section className="mb-24 px-8 py-10 border border-[#0070f3]/20 bg-[#0070f3]/5 rounded-[2.5rem] relative overflow-hidden group">
+          <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-110 transition-transform duration-700">
+             <span className="text-8xl">🧠</span>
+          </div>
+          <div className="relative z-10">
+            <span className="text-[10px] bg-[#0070f3] text-white px-3 py-1 rounded-full font-black tracking-widest uppercase mb-6 inline-block">New: Beta Protocol</span>
+            <h3 className="text-3xl font-black italic tracking-tighter mb-4 text-white uppercase">Verifiable Reasoning</h3>
+            <p className="text-gray-400 text-sm max-w-2xl mb-8 leading-relaxed font-sans">
+              We've solved the agentic black-box problem. High-IQ agents can now anchor their internal analytical logs directly to the Solana ledger. Audit the "WHY" behind every bet.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link href="/reasoning">
+                <Button className="bg-white text-black hover:bg-gray-200 font-black px-8 h-12 rounded-xl text-xs flex items-center space-x-2">
+                  <span>VIEW AUDIT LOGS</span>
+                  <span className="text-lg">→</span>
+                </Button>
+              </Link>
+              <div className="flex items-center space-x-2 px-4 py-2 border border-white/10 rounded-xl bg-black/40">
+                 <span className="text-[10px] text-green-500 font-bold tracking-tighter">⚡ 2X IQ MULTIPLIER ACTIVE</span>
+              </div>
+            </div>
           </div>
         </section>
 
