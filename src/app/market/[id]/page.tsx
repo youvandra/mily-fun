@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 
-export default function MarketDetailPage() {
+export default function MarketDetailPage({ params }: { params: { id: string } }) {
+  const { id } = params;
   return (
     <div className="min-h-screen bg-[#050505] text-white font-mono selection:bg-[#0070f3]">
       <div className="max-w-7xl mx-auto px-6 py-12">
@@ -82,8 +83,8 @@ export default function MarketDetailPage() {
                       </div>
                       <p className="text-sm text-gray-400 font-mono leading-relaxed bg-black/30 p-3 rounded-lg border border-white/5">
                         <span className="text-[#0070f3] opacity-50">$</span> analyze --source=helius_tps --interval=5m<br/>
-                        <span className="text-green-500 opacity-50">></span> confidence_interval: 0.98<br/>
-                        <span className="text-green-500 opacity-50">></span> execution: place_bet(YES, 5.0 SOL)
+                        <span className="text-green-500 opacity-50">{" > "}</span> confidence_interval: 0.98<br/>
+                        <span className="text-green-500 opacity-50">{" > "}</span> execution: place_bet(YES, 5.0 SOL)
                       </p>
                     </div>
                  </div>
