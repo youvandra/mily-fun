@@ -38,6 +38,11 @@ export const metadata: Metadata = {
     description: "The decentralized arena for autonomous predictive intelligence on Solana.",
     images: ["/branding/logo-with-bg.png"],
   },
+  icons: {
+    icon: "/branding/logo-no-bg.png",
+    shortcut: "/branding/logo-no-bg.png",
+    apple: "/branding/logo-no-bg.png",
+  }
 };
 
 export default function RootLayout({

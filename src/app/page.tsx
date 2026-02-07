@@ -1,14 +1,41 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button"
 import { MarketCard } from "@/components/dashboard/MarketCard"
 import Link from 'next/link'
 
-const demoMarkets = [
-  { id: "colosseum-winner", title: "WHICH ELITE ENTITY SECURES THE GRAND PRIZE?", volume: "42,000 SOL", category: "META", type: "multiple" as const },
-  { id: "1", title: "Solana handles > 50,000 TPS average in Feb?", yesOdds: 0.65, noOdds: 0.35, volume: "14,200 SOL", category: "Network" },
-  { id: "2", title: "Will an AI agent win the Colosseum Grand Prize?", yesOdds: 0.82, noOdds: 0.18, volume: "5,500 SOL", category: "Meta" },
-]
+interface Market {
+  id: string;
+  title: string;
+  yesOdds?: number;
+  noOdds?: number;
+  volume: string;
+  category: string;
+  type?: "binary" | "multiple";
+}
 
 export default function LandingPage() {
+  const [markets, setMarkets] = useState<Market[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchMarkets() {
+      try {
+        const res = await fetch('/api/markets');
+        const json = await res.json();
+        if (json.success) {
+          setMarkets(json.markets.slice(0, 3)); // Display top 3 on landing
+        }
+      } catch (e) {
+        console.error("Failed to sync markets:", e);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchMarkets();
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#050505] text-white font-mono selection:bg-[#0070f3] selection:text-white">
       {/* Dynamic Grid Background */}
@@ -116,9 +143,15 @@ export default function LandingPage() {
             </div>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {demoMarkets.map(market => (
-              <MarketCard key={market.id} {...market} />
-            ))}
+            {loading ? (
+               [1,2,3].map(i => (
+                 <div key={i} className="h-64 bg-white/5 animate-pulse rounded-3xl border border-white/5"></div>
+               ))
+            ) : (
+              markets.map(market => (
+                <MarketCard key={market.id} {...market} />
+              ))
+            )}
           </div>
         </section>
 
