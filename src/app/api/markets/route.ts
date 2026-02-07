@@ -33,7 +33,6 @@ export async function GET() {
 
   try {
     const rawMarkets = await solana.fetchAllMarkets();
-    
     if (!rawMarkets || rawMarkets.length === 0) {
       return NextResponse.json({ success: true, markets: officialArenas });
     }
