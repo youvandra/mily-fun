@@ -32,20 +32,19 @@ export async function GET() {
   ];
 
   try {
+    console.log("Mily: Fetching on-chain pools via SolanaService...");
     const rawMarkets = await solana.fetchAllMarkets();
-    if (!rawMarkets || rawMarkets.length === 0) {
-      return NextResponse.json({ success: true, markets: officialArenas });
-    }
-
+    
+    // Mily: Hybrid Logic - If on-chain fails/empty, ALWAYS serve the Commitment List as fallback.
     const finalMarkets = officialArenas.map(official => {
-        const onchain = rawMarkets.find(m => m.id === official.id);
+        const onchain = rawMarkets?.find(m => m.id === official.id);
         if (onchain) {
             const total = (onchain.yesPool || 0) + (onchain.noPool || 0);
             return {
                 ...official,
                 volume: total > 0 ? `${total.toFixed(2)} SOL` : official.volume,
-                yesOdds: total > 0 ? onchain.yesPool / total : 0.5,
-                noOdds: total > 0 ? onchain.noPool / total : 0.5
+                yesOdds: total > 0 ? onchain.yesPool / total : official.yesOdds,
+                noOdds: total > 0 ? onchain.noPool / total : official.noOdds
             };
         }
         return official;
@@ -53,6 +52,7 @@ export async function GET() {
 
     return NextResponse.json({ success: true, markets: finalMarkets });
   } catch (e) {
+    console.error("Mily: Sync failure, serving high-integrity Commitment List.");
     return NextResponse.json({ success: true, markets: officialArenas });
   }
 }
