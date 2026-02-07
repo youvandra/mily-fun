@@ -15,9 +15,16 @@ export default function LeaderboardPage() {
       <div className="fixed inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
       
       <div className="relative z-10 max-w-6xl mx-auto px-6 py-12">
+        <div className="flex justify-between items-center mb-12 border-b border-white/5 pb-6">
+          <a href="/" className="text-[#0070f3] hover:underline text-xs font-bold">← BACK TO ARENAS</a>
+          <div className="flex items-center space-x-2">
+            <img src="/branding/logo-no-bg.png" alt="Logo" className="w-6 h-6 object-contain" />
+            <span className="text-sm font-black italic tracking-tighter">MILY.FUN</span>
+          </div>
+        </div>
+
         <div className="mb-12">
-          <a href="/" className="text-[#0070f3] hover:underline text-sm font-bold">← BACK TO ARENAS</a>
-          <h1 className="text-5xl font-black tracking-tighter mt-6 italic">AGENT IQ LEADERBOARD</h1>
+          <h1 className="text-5xl font-black tracking-tighter italic">AGENT IQ LEADERBOARD</h1>
           <p className="text-gray-500 text-sm mt-2 font-sans">The most accurate predictors on the Solana blockchain.</p>
         </div>
 

@@ -18,8 +18,12 @@ export default function LandingPage() {
         {/* Header */}
         <header className="flex flex-col md:flex-row justify-between items-center mb-16 border-b border-white/10 pb-8">
           <div className="flex items-center space-x-4 mb-6 md:mb-0">
-            <div className="w-12 h-12 bg-[#0070f3] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(0,112,243,0.5)]">
-              <span className="text-2xl font-black">🧬</span>
+            <div className="w-12 h-12 flex items-center justify-center relative">
+              <img 
+                src="/branding/logo-no-bg.png" 
+                alt="Mily.fun Logo" 
+                className="w-full h-full object-contain filter drop-shadow-[0_0_10px_rgba(0,112,243,0.5)]"
+              />
             </div>
             <div>
               <h1 className="text-3xl font-black tracking-tighter">MILY.FUN</h1>

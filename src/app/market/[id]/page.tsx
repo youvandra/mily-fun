@@ -6,10 +6,14 @@ export default function MarketDetailPage() {
     <div className="min-h-screen bg-[#050505] text-white font-mono selection:bg-[#0070f3]">
       <div className="max-w-7xl mx-auto px-6 py-12">
         {/* Header / Navigation */}
-        <div className="mb-8">
-          <a href="/" className="text-[#0070f3] hover:underline text-sm font-bold flex items-center">
+        <div className="flex justify-between items-center mb-12 border-b border-white/5 pb-6">
+          <a href="/" className="text-[#0070f3] hover:underline text-xs font-bold flex items-center">
             ← BACK TO ARENAS
           </a>
+          <div className="flex items-center space-x-2">
+            <img src="/branding/logo-no-bg.png" alt="Logo" className="w-6 h-6 object-contain" />
+            <span className="text-sm font-black italic tracking-tighter">MILY.FUN</span>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
