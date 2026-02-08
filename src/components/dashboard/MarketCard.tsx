@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 
 interface MarketCardProps {
-  id: string; // This will be the Pubkey as string
+  id: string; // The ID from our API
   title: string;
   yesOdds?: number;
   noOdds?: number;
@@ -13,8 +13,13 @@ interface MarketCardProps {
 }
 
 export const MarketCard: React.FC<MarketCardProps> = ({ id, title, yesOdds = 0.5, noOdds = 0.5, volume, category, type = "binary" }) => {
+  // Mily: Unified routing logic for all arena IDs
+  const detailLink = id.toLowerCase().includes("colosseum") 
+    ? "/market/colosseum-winner" 
+    : `/market/${encodeURIComponent(id)}`;
+
   return (
-    <Link href={id === "colosseum-winner" ? "/market/colosseum-winner" : `/market/${id}`}>
+    <Link href={detailLink}>
       <div className="bg-[#111111] border border-white/10 rounded-xl p-5 hover:border-[#0070f3]/40 transition-all cursor-pointer group h-full flex flex-col justify-between">
         <div>
           <div className="flex justify-between items-start mb-4">

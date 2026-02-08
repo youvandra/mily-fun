@@ -43,7 +43,12 @@ export default function ArenaExplorerPage() {
         const res = await fetch('/api/markets');
         const json = await res.json();
         if (json.success && json.markets && json.markets.length > 0) {
-          setMarkets(json.markets);
+          // Normalize IDs to match filenames (some are lowercase in routing)
+          const normalized = json.markets.map((m: any) => ({
+            ...m,
+            routeId: m.id.toLowerCase()
+          }));
+          setMarkets(normalized);
         }
       } catch (e) {
         console.error("Arenas fetch loop failing, using persistent cache.");
