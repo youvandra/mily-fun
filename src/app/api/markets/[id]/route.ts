@@ -1,5 +1,5 @@
 import { SolanaService } from '@/lib/solana';
-import { NextResponse } from 'next/server';
+import { NextResponse, type NextRequest } from 'next/server';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,17 +19,14 @@ const COMMITMENT_ARENAS = [
 ];
 
 export async function GET(
-  request: Request,
-  { params }: { params: { id: string } }
+  request: NextRequest,
+  context: { params: Promise<{ id: string }> }
 ) {
-  const id = params.id;
+  const { id } = await context.params;
   const solana = new SolanaService();
 
   try {
-    // 1. Try real on-chain details
     const onchain = await solana.fetchMarketDetails(id);
-    
-    // 2. Try matching with our commitment list
     const fallback = COMMITMENT_ARENAS.find(m => m.id === id);
 
     if (!onchain && !fallback) {
